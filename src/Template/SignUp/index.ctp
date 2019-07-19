@@ -1,5 +1,4 @@
-<h1>ユーザ登録</h1>
-<hr />
+<?php echo $this->element('Header', ['PageTitle' => 'ユーザ登録']) ?>
 
 <?php
     echo $this->Html->link("トップページに戻る",
