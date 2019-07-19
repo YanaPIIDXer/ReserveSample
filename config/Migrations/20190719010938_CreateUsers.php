@@ -36,7 +36,7 @@ class CreateUsers extends AbstractMigration
         $table->create();
 
         // BINARY属性を付ける方法はこれしかないっぽい。
-        $this->execute('alter table users modify user_id varchar(255) binary');
-        $this->execute('alter table users modify password varchar(255) binary');
+        $this->execute('alter table users modify user_id varchar(255) binary not null');
+        $this->execute('alter table users modify password varchar(255) binary not null');
     }
 }

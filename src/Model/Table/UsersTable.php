@@ -58,20 +58,38 @@ class UsersTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
+            ->scalar('user_id')
+            ->maxLength('user_id', 255)
+            ->requirePresence('user_id', 'create')
+            ->notEmptyString('user_id', 'ユーザＩＤを入力して下さい。')
+            ->add('user_id', 'unique',
+            [
+                'rule' => 'validateUnique',
+                'provider' => 'table',
+                'message' => '既に使われているユーザＩＤです。'
+            ]);
+            
+        $validator
             ->scalar('password')
             ->maxLength('password', 255)
-            ->allowEmptyString('password');
+            ->requirePresence('password', 'create')
+            ->notEmptyString('password', 'パスワードを入力して下さい。');
 
         $validator
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->notEmptyString('name');
+            ->notEmptyString('name', 'ユーザ名を入力して下さい。');
 
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
-            ->notEmptyString('email');
+            ->notEmptyString('email', 'メールアドレスを入力して下さい。')
+            ->add('email', 'ValidFormat', 
+            [
+                'rule' => 'email',
+                'message' => 'メールアドレスの形式が不正です。',
+            ]);
 
         return $validator;
     }
@@ -85,9 +103,6 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
-
         return $rules;
     }
 }
