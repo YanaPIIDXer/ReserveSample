@@ -1,7 +1,9 @@
-<?php
-    print("トップページ<br />");
+<h1>予約システム サンプル</h1>
+<hr />
 
-    echo $this->Html->link('ユーザ登録',[
+<?php
+    echo $this->Html->link("ユーザ登録",
+    [
         'controller' => 'SignUp',
         'action' => 'index',
     ]);

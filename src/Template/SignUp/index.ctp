@@ -1,7 +1,9 @@
-<?php
-    print("登録ページ<br />");
+<h1>ユーザ登録</h1>
+<hr />
 
-    echo $this->Html->link('トップページに戻る',[
+<?php
+    echo $this->Html->link("トップページに戻る",
+    [
         'controller' => 'Top',
         'action' => 'index',
     ]);
