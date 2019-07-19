@@ -55,8 +55,7 @@ class AppController extends Controller
             ],
             'loginRedirect' =>
             [
-                // @TODO:ユーザページ作るまで仮。
-                'controller' => 'Top',
+                'controller' => 'UserTop',
                 'action' => 'index',
             ],
             'logoutRedirect' =>
@@ -71,6 +70,7 @@ class AppController extends Controller
                     'fields' => ['username' => 'user_id', 'password' => 'password']
                 ]
             ],
+            'authError' => 'ログインして下さい。',
         ]);
 
         /*
