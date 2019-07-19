@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\Event\Event;
 
 // 登録ページコントローラ
 class SignUpController extends AppController
@@ -12,6 +13,7 @@ class SignUpController extends AppController
     {
         parent::initialize();
         $this->Users = TableRegistry::get('users');
+        $this->Auth->allow(['index', 'signup']);
     }
     
     // index
@@ -30,6 +32,7 @@ class SignUpController extends AppController
         $this->set(compact('user'), $user);
     }
 
+    // signup
     public function signup()
     {
         if(!$this->request->is('post'))
