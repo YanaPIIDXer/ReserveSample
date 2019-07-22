@@ -1,5 +1,31 @@
 <?php echo $this->element('Header', ['PageTitle' => 'イベントカレンダー']) ?>
 
+<div class="Previous">
+    <?php
+        echo $this->Html->link($days[0]->addMonth(-1)->format('Y年n月'),
+        [
+            'controller' => 'EventCalendar',
+            'action' => 'index',
+            'offset' => $offset - 1,
+        ]);
+    ?>
+</div>
+
+<h2><?= $days[0]->format('Y年n月') ?></h2>
+
+<div class="Next">
+    <?php
+        echo $this->Html->link($days[0]->addMonth(1)->format('Y年n月'),
+        [
+            'controller' => 'EventCalendar',
+            'action' => 'index',
+            'offset' => $offset + 1,
+        ]);
+    ?>
+</div>
+
+<br />
+
 <table border="1" class="EventCalendar">
 <thead>
     <?=$this->Html->tableHeaders(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])?>
@@ -29,7 +55,6 @@
         }
     }
 ?>
-
 </table>
 
 <?php

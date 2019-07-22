@@ -10,9 +10,25 @@ class EventCalendarController extends AppController
     // index
     public function index()
     {
-        $days = $this->getDaysOfMonth();
+        $offset = 0;
+        if($this->request->getQuery('offset'))
+        {
+            $offset = $this->request->getQuery('offset');
+        }
+
+        if($offset !== 0 && !preg_match('/^[-][1-9]+[0-9]*$|^[1-9]+[0-9]*$/', $offset))
+        {
+            return $this->redirect(
+                [
+                    'controller' => 'EventCalendar',
+                    'action' => 'index',
+                ]);
+        }
+
+        $days = $this->getDaysOfMonth($offset);
 
         $this->set('days', $days);
+        $this->set('offset', $offset);
     }
 
     // 指定した月の日付を取得。
