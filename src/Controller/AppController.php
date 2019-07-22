@@ -79,4 +79,11 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
     }
+
+    // 管理者ページか？
+    protected function isAdminPage()
+    {
+        return (isset($this->params['prefix']) && $this->params['prefix'] === 'Admin');
+    }
+    
 }
