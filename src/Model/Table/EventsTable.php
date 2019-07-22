@@ -5,6 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\I18n\FrozenDate;
 
 /**
  * Events Model
@@ -61,12 +62,27 @@ class EventsTable extends Table
         $validator
             ->integer('capacity')
             ->requirePresence('capacity', 'create')
-            ->notEmptyString('capacity');
+            ->notEmptyString('capacity')
+            ->add('capacity', 'ValidValue',
+            [
+                'rule' => ['comparison', '>', 0],
+                'message' => "定員は０人以上でなければなりません。",
+            ]);
 
         $validator
-            ->dateTime('date')
+            ->date('date')
             ->requirePresence('date', 'create')
-            ->notEmptyDateTime('date');
+            ->notEmptyDate('date')
+            ->add('date', 'ValidDate',
+            [
+               'rule' => function($value)
+               {
+                   $dateString = $value['year'] . "/" . $value['month'] . "/" . $value['day'];
+                   $frozenDate = new FrozenDate($dateString);
+                   return $frozenDate->isFuture();
+               },
+               'message' => '過去・当日の日付は指定できません。',
+            ]);
 
         return $validator;
     }

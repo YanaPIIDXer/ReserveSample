@@ -10,7 +10,7 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property string $description
  * @property int $capacity
- * @property \Cake\I18n\FrozenTime $date
+ * @property \Cake\I18n\FrozenDate $date
  */
 class Event extends Entity
 {

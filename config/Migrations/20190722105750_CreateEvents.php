@@ -27,7 +27,7 @@ class CreateEvents extends AbstractMigration
             'limit' => 11,
             'null' => false,
         ]);
-        $table->addColumn('date', 'datetime', [
+        $table->addColumn('date', 'date', [
             'default' => null,
             'null' => false,
         ]);
