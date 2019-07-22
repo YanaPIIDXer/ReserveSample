@@ -77,7 +77,10 @@ class AppController extends Controller
                     ]
                 ],
                 'authError' => '不正なアクセスです。',
+                'storage' => ['className' => 'Session', 'Key' => 'Auth.Admin'],
             ]);
+
+            $this->Auth->sessionKey = 'Auth.Admin';
         }
         else
         {
@@ -107,7 +110,10 @@ class AppController extends Controller
                     ]
                 ],
                 'authError' => 'ログインして下さい。',
-            ]);        
+                'storage' => ['className' => 'Session', 'Key' => 'Auth.User'],
+            ]);
+            
+            $this->Auth->sessionKey = 'Auth.User';
         }
 
         /*
