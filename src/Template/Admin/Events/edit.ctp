@@ -28,4 +28,11 @@
     </fieldset>
     <?= $this->Form->button(__('更新')) ?>
     <?= $this->Form->end() ?>
+    <?php
+        echo $this->Html->link("戻る",
+        [
+            'controller' => 'Events',
+            'action' => 'index',
+        ]);
+    ?>
 </div>

@@ -22,4 +22,12 @@
     </fieldset>
     <?= $this->Form->button(__('追加')) ?>
     <?= $this->Form->end() ?>
+    <?php
+        echo $this->Html->link("戻る",
+        [
+            'controller' => 'Events',
+            'action' => 'index',
+        ]);
+    ?>
 </div>
+<br />

@@ -16,24 +16,27 @@
     <h3><?= h($event->name) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Name') ?></th>
+            <th scope="row"><?= __('イベント名') ?></th>
             <td><?= h($event->name) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($event->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Capacity') ?></th>
+            <th scope="row"><?= __('定員') ?></th>
             <td><?= $this->Number->format($event->capacity) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Date') ?></th>
+            <th scope="row"><?= __('日付') ?></th>
             <td><?= h($event->date) ?></td>
         </tr>
     </table>
     <div class="row">
-        <h4><?= __('Description') ?></h4>
+        <h4><?= __('説明') ?></h4>
         <?= $this->Text->autoParagraph(h($event->description)); ?>
     </div>
+    <?php
+        echo $this->Html->link("戻る",
+        [
+            'controller' => 'Events',
+            'action' => 'index',
+        ]);
+    ?>
 </div>
