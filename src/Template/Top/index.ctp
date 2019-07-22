@@ -23,8 +23,8 @@
         echo $this->Html->link("管理者ログイン",
         [
             'prefix' => 'admin',
-            'controller' => 'AdminSignUp',
-            'action' => 'index',
+            'controller' => 'AdminAuth',
+            'action' => 'login',
         ]);
     ?>
 <hr />
