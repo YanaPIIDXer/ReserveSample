@@ -1,5 +1,6 @@
 <?php
 use Migrations\AbstractSeed;
+use Cake\Auth\DefaultPasswordHasher;
 
 /**
  * Admin seed.
@@ -19,7 +20,7 @@ class AdminSeed extends AbstractSeed
     public function run()
     {
         $data = [
-            ['user_id' => env('ADMIN_ID'), 'password' => env('ADMIN_PASSWORD')],
+            ['user_id' => env('ADMIN_ID'), 'password' => (new DefaultPasswordHasher)->hash(env('ADMIN_PASSWORD'))],
         ];
 
         $table = $this->table('admins');

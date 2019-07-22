@@ -13,12 +13,32 @@ class AdminAuthController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->Admins = TableRegistry::get('admins');
+        $this->Auth->allow(['index', 'login']);
     }
 
     // index
     public function login()
     {
         if(!$this->request->is('post')) { return; }
+
+        $admin = $this->Auth->identify();
+        if(!$admin)
+        {
+            $this->Flash->error("ログインに失敗しました。");
+            $this->redirect(['controller' => 'AdminAuth', 'action' => 'login']);
+            return;
+        }
+
+        $this->Auth->setUser($admin);
+        
+        $this->Flash->success("ログインしました。");
+        $this->redirect($this->Auth->redirectUrl());
+    }
+
+    // logout
+    public function logout()
+    {
+        $this->Flash->success("ログアウトしました。");
+        $this->redirect($this->Auth->logout());
     }
 }

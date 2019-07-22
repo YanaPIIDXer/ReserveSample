@@ -48,7 +48,37 @@ class AppController extends Controller
 
         if($this->request->getParam('prefix') === "admin")
         {
-            
+            $this->loadComponent('Auth',
+            [
+                'loginAction' =>
+                [
+                  'controller' => 'AdminAuth',
+                  'action' => 'login',
+                  'prefix' => 'admin',
+                ],
+                'loginRedirect' =>
+                [
+                    // @TODO:仮。
+                    'controller' => 'Top',
+                    'action' => 'index',
+                    'prefix' => false,
+                ],
+                'logoutRedirect' =>
+                [
+                    'controller' => 'Top',
+                    'action' => 'index',
+                    'prefix' => false,
+                ],
+                'authenticate' =>
+                [
+                    'Form' =>
+                    [
+                        'userModel' => 'Admins',
+                        'fields' => ['username' => 'user_id', 'password' => 'password']
+                    ]
+                ],
+                'authError' => '不正なアクセスです。',
+            ]);
         }
         else
         {
@@ -73,6 +103,7 @@ class AppController extends Controller
                 [
                     'Form' =>
                     [
+                        'userModel' => 'Users',
                         'fields' => ['username' => 'user_id', 'password' => 'password']
                     ]
                 ],
