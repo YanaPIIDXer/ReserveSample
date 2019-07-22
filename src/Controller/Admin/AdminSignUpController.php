@@ -1,5 +1,6 @@
 <?php
-namespace App\Controller;
+
+namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
@@ -10,7 +11,6 @@ class AdminSignUpController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->Auth->allow(['index']);
     }
 
     // index

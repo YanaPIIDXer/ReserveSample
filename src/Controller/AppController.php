@@ -46,32 +46,39 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
 
-        $this->loadComponent('Auth',
-        [
-            'loginAction' =>
+        if($this->request->getParam('prefix') === "admin")
+        {
+            
+        }
+        else
+        {
+            $this->loadComponent('Auth',
             [
-              'controller' => 'Auth',
-              'action' => 'login',  
-            ],
-            'loginRedirect' =>
-            [
-                'controller' => 'UserTop',
-                'action' => 'index',
-            ],
-            'logoutRedirect' =>
-            [
-                'controller' => 'Top',
-                'action' => 'index',
-            ],
-            'authenticate' =>
-            [
-                'Form' =>
+                'loginAction' =>
                 [
-                    'fields' => ['username' => 'user_id', 'password' => 'password']
-                ]
-            ],
-            'authError' => 'ログインして下さい。',
-        ]);
+                  'controller' => 'Auth',
+                  'action' => 'login',  
+                ],
+                'loginRedirect' =>
+                [
+                    'controller' => 'UserTop',
+                    'action' => 'index',
+                ],
+                'logoutRedirect' =>
+                [
+                    'controller' => 'Top',
+                    'action' => 'index',
+                ],
+                'authenticate' =>
+                [
+                    'Form' =>
+                    [
+                        'fields' => ['username' => 'user_id', 'password' => 'password']
+                    ]
+                ],
+                'authError' => 'ログインして下さい。',
+            ]);        
+        }
 
         /*
          * Enable the following component for recommended CakePHP security settings.
@@ -79,11 +86,4 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
     }
-
-    // 管理者ページか？
-    protected function isAdminPage()
-    {
-        return (isset($this->params['prefix']) && $this->params['prefix'] === 'Admin');
-    }
-    
 }

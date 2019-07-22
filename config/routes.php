@@ -102,3 +102,8 @@ Router::scope('/', function (RouteBuilder $routes) {
  * });
  * ```
  */
+
+// Admin
+Router::prefix('admin', function (RouteBuilder $routes) {
+    $routes->fallbacks(DashedRoute::class);
+});

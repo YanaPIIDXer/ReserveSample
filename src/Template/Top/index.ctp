@@ -22,6 +22,7 @@
         echo $this->Html->css('Top.css');
         echo $this->Html->link("管理者ログイン",
         [
+            'prefix' => 'admin',
             'controller' => 'AdminSignUp',
             'action' => 'index',
         ]);
