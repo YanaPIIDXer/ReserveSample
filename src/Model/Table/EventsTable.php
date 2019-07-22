@@ -52,17 +52,17 @@ class EventsTable extends Table
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->notEmptyString('name');
+            ->notEmptyString('name', 'イベント名を入力して下さい。');
 
         $validator
             ->scalar('description')
             ->requirePresence('description', 'create')
-            ->notEmptyString('description');
+            ->notEmptyString('description', 'イベントの詳細を入力して下さい。');
 
         $validator
             ->integer('capacity')
             ->requirePresence('capacity', 'create')
-            ->notEmptyString('capacity')
+            ->notEmptyString('capacity', '定員を入力して下さい。')
             ->add('capacity', 'ValidValue',
             [
                 'rule' => ['comparison', '>', 0],
@@ -72,7 +72,7 @@ class EventsTable extends Table
         $validator
             ->date('date')
             ->requirePresence('date', 'create')
-            ->notEmptyDate('date')
+            ->notEmptyDate('date', '日付を入力して下さい。')
             ->add('date', 'ValidDate',
             [
                'rule' => function($value)
