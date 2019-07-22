@@ -52,16 +52,15 @@ class AppController extends Controller
             [
                 'loginAction' =>
                 [
-                  'controller' => 'AdminAuth',
-                  'action' => 'login',
-                  'prefix' => 'admin',
+                  'controller' => 'Top',
+                  'action' => 'index',
+                  'prefix' => false,
                 ],
                 'loginRedirect' =>
                 [
-                    // @TODO:仮。
-                    'controller' => 'Top',
+                    'controller' => 'AdminTop',
                     'action' => 'index',
-                    'prefix' => false,
+                    'prefix' => 'admin',
                 ],
                 'logoutRedirect' =>
                 [

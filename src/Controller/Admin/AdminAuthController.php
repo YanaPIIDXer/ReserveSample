@@ -13,7 +13,7 @@ class AdminAuthController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->Auth->allow(['index', 'login']);
+        $this->Auth->allow(['login']);
     }
 
     // index
