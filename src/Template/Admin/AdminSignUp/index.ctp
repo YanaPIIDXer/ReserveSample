@@ -5,5 +5,6 @@
     [
         'controller' => 'Top',
         'action' => 'index',
+        'prefix' => false,
     ]);
 ?>
