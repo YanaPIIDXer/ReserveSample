@@ -102,3 +102,8 @@ Router::scope('/', function (RouteBuilder $routes) {
  * });
  * ```
  */
+
+ // Admin
+ Router::scope('/', function (RouteBuilder $routes) {
+     $routes->connect("/Admin/:controller/*", array('controller' => 'AdminSignUp'));
+ });
