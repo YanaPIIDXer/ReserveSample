@@ -46,32 +46,75 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
 
-        $this->loadComponent('Auth',
-        [
-            'loginAction' =>
+        if($this->request->getParam('prefix') === "admin")
+        {
+            $this->loadComponent('Auth',
             [
-              'controller' => 'Auth',
-              'action' => 'login',  
-            ],
-            'loginRedirect' =>
-            [
-                // @TODO:ユーザページ作るまで仮。
-                'controller' => 'Top',
-                'action' => 'index',
-            ],
-            'logoutRedirect' =>
-            [
-                'controller' => 'Top',
-                'action' => 'index',
-            ],
-            'authenticate' =>
-            [
-                'Form' =>
+                'loginAction' =>
                 [
-                    'fields' => ['username' => 'user_id', 'password' => 'password']
-                ]
-            ],
-        ]);
+                  'controller' => 'Top',
+                  'action' => 'index',
+                  'prefix' => false,
+                ],
+                'loginRedirect' =>
+                [
+                    'controller' => 'AdminTop',
+                    'action' => 'index',
+                    'prefix' => 'admin',
+                ],
+                'logoutRedirect' =>
+                [
+                    'controller' => 'Top',
+                    'action' => 'index',
+                    'prefix' => false,
+                ],
+                'authenticate' =>
+                [
+                    'Form' =>
+                    [
+                        'userModel' => 'Admins',
+                        'fields' => ['username' => 'user_id', 'password' => 'password']
+                    ]
+                ],
+                'authError' => '不正なアクセスです。',
+                'storage' => ['className' => 'Session', 'Key' => 'Auth.Admin'],
+            ]);
+
+            $this->Auth->sessionKey = 'Auth.Admin';
+        }
+        else
+        {
+            $this->loadComponent('Auth',
+            [
+                'loginAction' =>
+                [
+                  'controller' => 'Auth',
+                  'action' => 'login',  
+                ],
+                'loginRedirect' =>
+                [
+                    'controller' => 'UserTop',
+                    'action' => 'index',
+                ],
+                'logoutRedirect' =>
+                [
+                    'controller' => 'Top',
+                    'action' => 'index',
+                ],
+                'authenticate' =>
+                [
+                    'Form' =>
+                    [
+                        'userModel' => 'Users',
+                        'fields' => ['username' => 'user_id', 'password' => 'password']
+                    ]
+                ],
+                'authError' => 'ログインして下さい。',
+                'storage' => ['className' => 'Session', 'Key' => 'Auth.User'],
+            ]);
+            
+            $this->Auth->sessionKey = 'Auth.User';
+        }
 
         /*
          * Enable the following component for recommended CakePHP security settings.

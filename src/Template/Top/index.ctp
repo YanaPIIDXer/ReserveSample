@@ -15,3 +15,17 @@
         'action' => 'index',
     ]);
 ?>
+
+<hr />
+<div class="TopFooter">
+    <?php
+        echo $this->Html->css('Top.css');
+        echo $this->Html->link("管理者ログイン",
+        [
+            'prefix' => 'admin',
+            'controller' => 'AdminAuth',
+            'action' => 'login',
+        ]);
+    ?>
+<hr />
+</div>
