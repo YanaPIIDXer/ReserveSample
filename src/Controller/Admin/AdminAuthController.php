@@ -19,6 +19,12 @@ class AdminAuthController extends AppController
     // index
     public function login()
     {
+        if($this->Auth->user() != null)
+        {
+            $this->redirect($this->Auth->redirectUrl());
+            return;
+        }
+
         if(!$this->request->is('post')) { return; }
 
         $admin = $this->Auth->identify();
