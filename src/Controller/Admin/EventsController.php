@@ -50,6 +50,13 @@ class EventsController extends AppController
         $event = $this->Events->newEntity();
         if ($this->request->is('post')) {
             $event = $this->Events->patchEntity($event, $this->request->getData());
+            if($this->Events->find()->where(['date' => $event->date])->count() > 0)
+            {
+                $this->Flash->error(__('既に同じ日にイベントが登録されています。'));
+                $this->set(compact('event'));   
+                return;
+            }
+            
             if ($this->Events->save($event)) {
                 $this->Flash->success(__('イベントを追加しました。'));
 
@@ -74,6 +81,13 @@ class EventsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $event = $this->Events->patchEntity($event, $this->request->getData());
+            if($this->Events->find()->where(['id !=' => $event->id, 'date' => $event->date])->count() > 0)
+            {
+                $this->Flash->error(__('既に同じ日にイベントが登録されています。'));
+                $this->set(compact('event'));   
+                return;
+            }
+            
             if ($this->Events->save($event)) {
                 $this->Flash->success(__('イベントを編集しました。'));
 
