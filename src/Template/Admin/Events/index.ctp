@@ -14,17 +14,15 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('capacity') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('date') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('name', ['label' => 'イベント名']) ?></th>
+                <th scope="col"><?= $this->Paginator->sort('capacity', ['label' => '定員']) ?></th>
+                <th scope="col"><?= $this->Paginator->sort('date', ['label' => '日付']) ?></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($events as $event): ?>
             <tr>
-                <td><?= $this->Number->format($event->id) ?></td>
                 <td><?= h($event->name) ?></td>
                 <td><?= $this->Number->format($event->capacity) ?></td>
                 <td><?= h($event->date) ?></td>
