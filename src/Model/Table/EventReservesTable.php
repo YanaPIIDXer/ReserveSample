@@ -9,9 +9,6 @@ use Cake\Validation\Validator;
 /**
  * EventReserves Model
  *
- * @property \App\Model\Table\EventsTable|\Cake\ORM\Association\BelongsTo $Events
- * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Users
- *
  * @method \App\Model\Entity\EventReserve get($primaryKey, $options = [])
  * @method \App\Model\Entity\EventReserve newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\EventReserve[] newEntities(array $data, array $options = [])
@@ -34,13 +31,6 @@ class EventReservesTable extends Table
         parent::initialize($config);
 
         $this->setTable('event_reserves');
-
-        $this->belongsTo('Events', [
-            'foreignKey' => 'event_id'
-        ]);
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id'
-        ]);
     }
 
     /**
@@ -52,9 +42,6 @@ class EventReservesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['event_id'], 'Events'));
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
-
         return $rules;
     }
 }

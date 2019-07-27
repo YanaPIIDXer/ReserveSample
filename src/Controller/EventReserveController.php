@@ -41,9 +41,9 @@ class EventReserveController extends AppController
         }
         
         $reserves = $this->EventReserves->find()->where(['event_id' => $Id]);
-        $isReserved = ($reserves->where(['user_id' => $this->Auth->user('id')])->first() != null);
         $isFull = ($reserves->count() >= $event->capacity);
-
+        $isReserved = ($reserves->where(['user_id' => $this->Auth->user('id')])->first() != null);
+        
         $this->set(compact('Id'));
         $this->set(compact('event'));
         $this->set(compact('isReserved'));
@@ -59,6 +59,18 @@ class EventReserveController extends AppController
             $this->redirect([
                 'controller' => 'EventCalendar',
                 'action' => 'index',
+            ]);
+            return;
+        }
+
+        $reserve = $this->EventReserves->newEntity(['event_id' => $Id, 'user_id' => $this->Auth->user('id')]);
+        if(!$this->EventReserves->save($reserve))
+        {
+            $this->Flash->error("予約に失敗しました。");
+            $this->redirect([
+                'controller' => 'EventReserve',
+                'action' => 'index',
+                'Id' => $Id,
             ]);
             return;
         }
@@ -80,6 +92,18 @@ class EventReserveController extends AppController
             $this->redirect([
                 'controller' => 'EventCalendar',
                 'action' => 'index',
+            ]);
+            return;
+        }
+
+        $reserve = $this->EventReserves->find()->where(['event_id' => $Id, 'user_id' => $this->Auth->user('id')])->first();        
+        if($reserve == null || !$this->EventReserves->delete($reserve))
+        {
+            $this->Flash->error("予約のキャンセルに失敗しました。");
+            $this->redirect([
+                'controller' => 'EventReserve',
+                'action' => 'index',
+                'Id' => $Id,
             ]);
             return;
         }

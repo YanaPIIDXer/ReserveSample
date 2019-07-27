@@ -9,8 +9,6 @@ use Cake\ORM\Entity;
  * @property int|null $event_id
  * @property int|null $user_id
  *
- * @property \App\Model\Entity\Event $event
- * @property \App\Model\Entity\User $user
  */
 class EventReserve extends Entity
 {
@@ -26,7 +24,5 @@ class EventReserve extends Entity
     protected $_accessible = [
         'event_id' => true,
         'user_id' => true,
-        'event' => true,
-        'user' => true
     ];
 }
