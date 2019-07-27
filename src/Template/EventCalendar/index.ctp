@@ -52,7 +52,12 @@
         $event = $query->where(['date' => $day])->first();
         if($event != null)
         {
-            $str .= "<br />" . $event->name;
+            $str .= "<br />" . $this->Html->link($event->name,
+            [
+                'controller' => 'EventReserve',
+                'action' => 'index',
+                'Id' => $event->id,
+            ]);
         }
 
         echo "<td>" . $str . "</td>\n";
