@@ -13,31 +13,38 @@
 
 <div class="Reserve">
 <?php
-    if(!$isReserved)
+    if(!$event->date->isPast())
     {
-        if(!$isFull)
+        if(!$isReserved)
         {
-            echo $this->Html->link("予約する。",
-            [
-                'controller' => 'EventReserve',
-                'action' => 'reserve',
-                'Id' => $Id,
-            ]);
+            if(!$isFull)
+            {
+                echo $this->Html->link("予約する。",
+                [
+                    'controller' => 'EventReserve',
+                    'action' => 'reserve',
+                    'Id' => $Id,
+                ]);
+            }
+            else
+            {
+                echo '<div class="IsFull">定員を満たしているため予約できません。</div>';
+            }
         }
         else
         {
-            echo '<div class="IsFull">定員を満たしているため予約できません。</div>';
-        }
+            echo $this->Html->link("予約を取り消す。",
+            [
+                'controller' => 'EventReserve',
+                'action' => 'cancel',
+                'Id' => $Id,
+            ]);
+    
+        }    
     }
     else
     {
-        echo $this->Html->link("予約を取り消す。",
-        [
-            'controller' => 'EventReserve',
-            'action' => 'cancel',
-            'Id' => $Id,
-        ]);
-
+        echo '<div class="IsFinished">このイベントは終了しています。</div>';
     }
 ?>
 </div>
