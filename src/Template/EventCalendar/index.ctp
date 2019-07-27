@@ -47,7 +47,15 @@
             }
         }
 
-        echo "<td>" . $day->format('n/j') . "</td>\n";
+        $str = $day->format('n/j');
+        $query = $events->find();
+        $event = $query->where(['date' => $day])->first();
+        if($event != null)
+        {
+            $str .= "<br />" . $event->name;
+        }
+
+        echo "<td>" . $str . "</td>\n";
 
         if($day->dayOfWeek === 0)
         {

@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Chronos\Chronos;
+use Cake\ORM\TableRegistry;
 
 // イベントカレンダー
 class EventCalendarController extends AppController
@@ -27,8 +28,11 @@ class EventCalendarController extends AppController
 
         $days = $this->getDaysOfMonth($offset);
 
+        $events = TableRegistry::get('events');
+
         $this->set('days', $days);
         $this->set('offset', $offset);
+        $this->set('events', $events);
     }
 
     // 指定した月の日付を取得。
