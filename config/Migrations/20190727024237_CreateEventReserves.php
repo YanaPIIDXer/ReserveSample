@@ -7,7 +7,7 @@ class CreateEventReserves extends AbstractMigration
     public function up()
     {
 
-        $this->table('event_reserves', ['id' => false])
+        $this->table('event_reserves')
             ->addColumn('event_id', 'integer', [
                 'default' => null,
                 'limit' => 11,
